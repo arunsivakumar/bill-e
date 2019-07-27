@@ -85,7 +85,7 @@ class _CardPageState extends State<CardPage> {
           ),
           Row(
             children: <Widget>[
-              cardDetails("", 35.170, 1, context,Colors.black),
+              cardDetails("\n**** **** **** 1234                            Change", 35.170, 1, context,Colors.black),
             ],
           ),
           SizedBox(
@@ -111,8 +111,8 @@ class _CardPageState extends State<CardPage> {
 
           Row(
             children: <Widget>[
-              usageAmount("", 35.170, 1, context,Colors.black),
-              usageAmount("", 35.170, 1, context,Colors.black),
+              colorCard("Today's Savings", 35.170, 1, context,Colors.black),
+              colorCard("Overall", 35.170, 1, context,Colors.black),
             ],
           ),
 
@@ -159,6 +159,31 @@ Widget cardImage(){
   );
 }
 
+Widget masterCard(
+    String text, double amount, int type, BuildContext context, Color color) {
+  final _media = MediaQuery.of(context).size;
+  return Container(
+    margin: EdgeInsets.only(top: 15, right: 15),
+    //padding: EdgeInsets.all(15),
+    height: 28,
+    width: 45 ,
+    decoration: BoxDecoration(
+        color: color,
+        image: DecorationImage(
+          image: AssetImage("assets/mastercard.png"),
+          fit: BoxFit.cover,
+        ),
+        borderRadius: BorderRadius.circular(15),
+        boxShadow: [
+          BoxShadow(
+              color: color.withOpacity(0.4),
+              blurRadius: 16,
+              spreadRadius: 0.2,
+              offset: Offset(0, 8)),
+        ]),
+  );
+}
+
 Widget userCard(
     String text, double amount, int type, BuildContext context, Color color) {
   final _media = MediaQuery.of(context).size;
@@ -188,20 +213,38 @@ Widget cardDetails(
     String text, double amount, int type, BuildContext context, Color color) {
   final _media = MediaQuery.of(context).size;
   return Container(
-      margin: EdgeInsets.only(top: 15, right: 15),
-      //padding: EdgeInsets.all(15),
-      height: screenAwareSize(60, context),
-      width: _media.width - 50 ,
-      decoration: BoxDecoration(
-          color: color,
-          borderRadius: BorderRadius.circular(15),
-          boxShadow: [
-      BoxShadow(
-      color: color.withOpacity(0.4),
-      blurRadius: 16,
-      spreadRadius: 0.2,
-       offset: Offset(0, 8)),
-      ]),
+    margin: EdgeInsets.only(top: 8, right: 15),
+    padding: EdgeInsets.all(15),
+    height: screenAwareSize(70, context),
+    width: _media.width - 50,
+    decoration: BoxDecoration(
+
+        color: color,
+        borderRadius: BorderRadius.circular(15),
+        boxShadow: [
+          BoxShadow(
+              color: color.withOpacity(0.4),
+              blurRadius: 16,
+              spreadRadius: 0.2,
+              offset: Offset(0, 8)),
+        ]),
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Image.asset(
+          'assets/mastercard.png', width: 50.0, height: 28.0,
+        ),
+        Text(
+          text,
+          style: TextStyle(
+            fontSize: 16,
+            color: Colors.white,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+      ],
+    ),
   );
 }
 
@@ -248,38 +291,51 @@ Widget usageAmount(
   );
 }
 
-Widget swipeableCard(BuildContext context, String name, double amount, int type,
-    Color fillColor, Color bgColor) {
-  return Slidable(
-    actionPane: SlidableDrawerActionPane(),
-    actionExtentRatio: 0.25,
-    child: Container(
-      margin: EdgeInsets.only(
-        top: 15,
-        right: 20,
-      ),
-      color: Colors.red,
-      child: ListTile(
-        leading: CircleAvatar(
-          backgroundColor: Colors.indigoAccent,
-          child: Text('AA'),
-          foregroundColor: Colors.white,
+Widget colorCard(
+    String text, double amount, int type, BuildContext context, Color color) {
+  final _media = MediaQuery.of(context).size;
+  return Container(
+    margin: EdgeInsets.only(top: 15, right: 15),
+    padding: EdgeInsets.all(15),
+    height: screenAwareSize(120, context),
+    width: _media.width / 2 - 25,
+    decoration: BoxDecoration(
+        color: color,
+        borderRadius: BorderRadius.circular(15),
+        boxShadow: [
+          BoxShadow(
+              color: color.withOpacity(0.4),
+              blurRadius: 16,
+              spreadRadius: 0.2,
+              offset: Offset(0, 8)),
+        ]),
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Image.asset(
+          'assets/swipe.png', width: 80.0, height: 28.0,
         ),
-        title: Text('Tile BB'),
-        subtitle: Text('SlidableDrawerDelegate'),
-      ),
+        Text(
+          text,
+          style: TextStyle(
+            fontSize: 18,
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        Text(
+          "${type > 0 ? "" : "-"} \$${amount.toString()}",
+          style: TextStyle(
+            fontSize: 32,
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        )
+      ],
     ),
-    secondaryActions: <Widget>[
-      IconSlideAction(
-        caption: 'Pay',
-        color: Colors.cyanAccent,
-        icon: Icons.payment,
-        onTap: () => "",
-      ),
-    ],
   );
 }
-
 
 class Bill {
   final String billerId;
