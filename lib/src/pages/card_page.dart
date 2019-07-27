@@ -111,8 +111,8 @@ class _CardPageState extends State<CardPage> {
 
           Row(
             children: <Widget>[
-              colorCard("Today's Savings", 35.170, 1, context,Colors.black),
-              colorCard("Overall", 35.170, 1, context,Colors.black),
+              colorCard("Today's Savings", 5.67, 1, context,Colors.black),
+              colorCard("Overall Savings", 35.170, 1, context,Colors.black),
             ],
           ),
 
