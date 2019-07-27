@@ -15,22 +15,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 1;
-  static const TextStyle optionStyle =
-  TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Index 0: Notifications',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 1: Home',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 2: Credit Card',
-      style: optionStyle,
-    ),
-  ];
 
   void _onItemTapped(int index) {
     setState(() {
@@ -41,6 +25,11 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final _media = MediaQuery.of(context).size;
+    List<Widget> widgetOptions = <Widget>[
+      homepageWidget(context),
+      homepageWidget(context),
+      homepageWidget(context),
+    ];
     return Scaffold(
 //      body: Center(
 //          child: FutureBuilder<List<Bill>>(
@@ -65,75 +54,7 @@ class _HomePageState extends State<HomePage> {
 //            },
 //          )
 //      ),
-      body: ListView(
-        physics: BouncingScrollPhysics(),
-        padding: EdgeInsets.only(
-          left: 20,
-          top: 70,
-        ),
-        children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text(
-                "BILL-E",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 25,
-          ),
-          Text(
-            "Due soon",
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              inherit: true,
-              letterSpacing: 0.4,
-            ),
-          ),
-          Row(
-            children: <Widget>[
-              colorCard("Cash", 35.170, 1, context, Color(0xFF1b5bff)),
-              colorCard("Credit Debt", 4320, -1, context, Color(0xFFff3f5e)),
-            ],
-          ),
-          SizedBox(
-            height: 30,
-          ),
-          Text(
-            "Bills Recurring",
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              inherit: true,
-              letterSpacing: 0.4,
-            ),
-          ),
-          swipeableCard(
-            context,
-            "Earned",
-            200,
-            1,
-            Colors.grey.shade100,
-            Color(0xFF716cff),
-          ),
-          swipeableCard(
-            context,
-            "Spent",
-            3210,
-            -1,
-            Colors.grey.shade100,
-            Color(0xFFff596b),
-          ),
-        ],
-      ),
+      body: widgetOptions.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -155,6 +76,79 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+}
+
+
+Widget homepageWidget(BuildContext context) {
+  return ListView(
+    physics: BouncingScrollPhysics(),
+    padding: EdgeInsets.only(
+      left: 20,
+      top: 70,
+    ),
+    children: <Widget>[
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text(
+            "BILL-E",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 15,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ],
+      ),
+      SizedBox(
+        height: 25,
+      ),
+      Text(
+        "Due soon",
+        style: TextStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+          inherit: true,
+          letterSpacing: 0.4,
+        ),
+      ),
+      Row(
+        children: <Widget>[
+          colorCard("Cash", 35.170, 1, context, Color(0xFF1b5bff)),
+          colorCard("Credit Debt", 4320, -1, context, Color(0xFFff3f5e)),
+        ],
+      ),
+      SizedBox(
+        height: 30,
+      ),
+      Text(
+        "Recurring Bills",
+        style: TextStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+          inherit: true,
+          letterSpacing: 0.4,
+        ),
+      ),
+      swipeableCard(
+        context,
+        "Earned",
+        200,
+        1,
+        Colors.grey.shade100,
+        Color(0xFF716cff),
+      ),
+      swipeableCard(
+        context,
+        "Spent",
+        3210,
+        -1,
+        Colors.grey.shade100,
+        Color(0xFFff596b),
+      ),
+    ],
+  );
 }
 
 Widget colorCard(
