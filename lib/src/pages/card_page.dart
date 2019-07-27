@@ -77,7 +77,7 @@ class _CardPageState extends State<CardPage> {
                 "LINKED TO",
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 15,
+                  fontSize: 12,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -94,23 +94,7 @@ class _CardPageState extends State<CardPage> {
           Row(
             children: <Widget>[
               Text(
-                "Day",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Text(
-                "Week",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Text(
-                "Month",
+                "Spending",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 18,
