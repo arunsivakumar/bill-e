@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:metsysoce/src/utils/screen_size.dart';
 import 'package:http/http.dart' as http;
 
 class HomePage extends StatefulWidget {
@@ -17,7 +19,7 @@ class _HomePageState extends State<HomePage> {
   TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
     Text(
-      'Index 0: Business',
+      'Index 0: Notifications',
       style: optionStyle,
     ),
     Text(
@@ -25,7 +27,7 @@ class _HomePageState extends State<HomePage> {
       style: optionStyle,
     ),
     Text(
-      'Index 2: School',
+      'Index 2: Credit Card',
       style: optionStyle,
     ),
   ];
@@ -38,29 +40,99 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final _media = MediaQuery.of(context).size;
     return Scaffold(
-      body: Center(
-          child: FutureBuilder<List<Bill>>(
-            future: getBills(), //sets the getBills method as the expected Future
-            builder: (context, snapshot) {
-              if (snapshot.hasData) { //checks if the response returns valid data
-                return Center(
-                  child: Column(
-                    children: <Widget>[
-                      Text(snapshot.data.first.billerName), //displays the billerName
-                      SizedBox(
-                        height: 10.0,
-                      ),
-                      Text(" - ${snapshot.data.first.billerName}"), //displays the amount
-                    ],
-                  ),
-                );
-              } else if (snapshot.hasError) { //checks if the response throws an error
-                return Text("${snapshot.error}");
-              }
-              return CircularProgressIndicator();
-            },
-          )
+//      body: Center(
+//          child: FutureBuilder<List<Bill>>(
+//            future: getBills(), //sets the getBills method as the expected Future
+//            builder: (context, snapshot) {
+//              if (snapshot.hasData) { //checks if the response returns valid data
+//                return Center(
+//                  child: Column(
+//                    children: <Widget>[
+//                      Text(snapshot.data.first.billerName), //displays the billerName
+//                      SizedBox(
+//                        height: 10.0,
+//                      ),
+//                      Text(" - ${snapshot.data.first.billerName}"), //displays the amount
+//                    ],
+//                  ),
+//                );
+//              } else if (snapshot.hasError) { //checks if the response throws an error
+//                return Text("${snapshot.error}");
+//              }
+//              return CircularProgressIndicator();
+//            },
+//          )
+//      ),
+      body: ListView(
+        physics: BouncingScrollPhysics(),
+        padding: EdgeInsets.only(
+          left: 20,
+          top: 70,
+        ),
+        children: <Widget>[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                "BILL-E",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 25,
+          ),
+          Text(
+            "Due soon",
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              inherit: true,
+              letterSpacing: 0.4,
+            ),
+          ),
+          Row(
+            children: <Widget>[
+              colorCard("Cash", 35.170, 1, context, Color(0xFF1b5bff)),
+              colorCard("Credit Debt", 4320, -1, context, Color(0xFFff3f5e)),
+            ],
+          ),
+          SizedBox(
+            height: 30,
+          ),
+          Text(
+            "Bills Recurring",
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              inherit: true,
+              letterSpacing: 0.4,
+            ),
+          ),
+          swipeableCard(
+            context,
+            "Earned",
+            200,
+            1,
+            Colors.grey.shade100,
+            Color(0xFF716cff),
+          ),
+          swipeableCard(
+            context,
+            "Spent",
+            3210,
+            -1,
+            Colors.grey.shade100,
+            Color(0xFFff596b),
+          ),
+        ],
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
@@ -78,12 +150,88 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.purpleAccent[800],
+        selectedItemColor: Colors.cyan,
         onTap: _onItemTapped,
       ),
     );
   }
 }
+
+Widget colorCard(
+    String text, double amount, int type, BuildContext context, Color color) {
+  final _media = MediaQuery.of(context).size;
+  return Container(
+    margin: EdgeInsets.only(top: 15, right: 15),
+    padding: EdgeInsets.all(15),
+    height: screenAwareSize(90, context),
+    width: _media.width / 2 - 25,
+    decoration: BoxDecoration(
+        color: color,
+        borderRadius: BorderRadius.circular(15),
+        boxShadow: [
+          BoxShadow(
+              color: color.withOpacity(0.4),
+              blurRadius: 16,
+              spreadRadius: 0.2,
+              offset: Offset(0, 8)),
+        ]),
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text(
+          text,
+          style: TextStyle(
+            fontSize: 18,
+            color: Colors.white,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+        Text(
+          "${type > 0 ? "" : "-"} \$ ${amount.toString()}",
+          style: TextStyle(
+            fontSize: 22,
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        )
+      ],
+    ),
+  );
+}
+
+Widget swipeableCard(BuildContext context, String name, double amount, int type,
+    Color fillColor, Color bgColor) {
+  return Slidable(
+    actionPane: SlidableDrawerActionPane(),
+    actionExtentRatio: 0.25,
+    child: Container(
+      margin: EdgeInsets.only(
+        top: 15,
+        right: 20,
+      ),
+      color: Colors.red,
+      child: ListTile(
+        leading: CircleAvatar(
+          backgroundColor: Colors.indigoAccent,
+          child: Text('AA'),
+          foregroundColor: Colors.white,
+        ),
+        title: Text('Tile BB'),
+        subtitle: Text('SlidableDrawerDelegate'),
+      ),
+    ),
+    secondaryActions: <Widget>[
+      IconSlideAction(
+        caption: 'Pay',
+        color: Colors.cyanAccent,
+        icon: Icons.payment,
+        onTap: () => "",
+      ),
+    ],
+  );
+}
+
 
 class Bill {
   final String billerId;
@@ -119,7 +267,7 @@ List<Bill> parseBills(Map<String, dynamic> parsedJson) {
 }
 
 Future<List<Bill>> getBills() async {
-  String url = 'http://192.168.0.197:4000/metsysoce/bills/id';
+  String url = 'https://f1dc19f2.ngrok.io/metsysoce/bills/id';
   final response =
   await http.get(url, headers: {"Accept": "application/json"});
 
