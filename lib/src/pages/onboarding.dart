@@ -28,10 +28,10 @@ class _OnboardingPageState extends State<OnboardingPage> {
     List<String> titles = [
       "Subscriptions", "Subscriptions", "Subscriptions", "Subscriptions"];
     List<String> descriptions = [
-      "Track all your recurring payments hassle-free",
-      "Track all your recurring payments hassle-free",
-      "Track all your recurring payments hassle-free",
-      "Track all your recurring payments hassle-free"];
+      "Track all your recurring \n payments hassle-free",
+      "Track all your recurring \n payments hassle-free",
+      "Track all your recurring \n payments hassle-free",
+      "Track all your recurring \n payments hassle-free"];
     return SpotlightCarousel(
       images: images,
       titles: titles,
