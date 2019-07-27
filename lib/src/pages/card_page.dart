@@ -70,7 +70,72 @@ class _CardPageState extends State<CardPage> {
           ),
           SizedBox(
             height: 30,
+          ),
+          Row(
+            children: <Widget>[
+              Text(
+                "LINKED TO",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+          Row(
+            children: <Widget>[
+              cardDetails("", 35.170, 1, context,Colors.black),
+            ],
+          ),
+          SizedBox(
+            height: 30,
+          ),
+          Row(
+            children: <Widget>[
+              Text(
+                "Day",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Text(
+                "Week",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Text(
+                "Month",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+          Row(
+            children: <Widget>[
+              usageChart("", 35.170, 1, context,Colors.black),
+            ],
+          ),
+
+          Row(
+            children: <Widget>[
+              usageAmount("", 35.170, 1, context,Colors.black),
+              usageAmount("", 35.170, 1, context,Colors.black),
+            ],
+          ),
+
+          SizedBox(
+            height: 30,
           )
+
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -132,6 +197,70 @@ Widget userCard(
               spreadRadius: 0.2,
              // offset: Offset(0, 8)),
         ]),
+  );
+}
+
+Widget cardDetails(
+    String text, double amount, int type, BuildContext context, Color color) {
+  final _media = MediaQuery.of(context).size;
+  return Container(
+      margin: EdgeInsets.only(top: 15, right: 15),
+      //padding: EdgeInsets.all(15),
+      height: screenAwareSize(60, context),
+      width: _media.width - 50 ,
+      decoration: BoxDecoration(
+          color: color,
+          borderRadius: BorderRadius.circular(15),
+          boxShadow: [
+      BoxShadow(
+      color: color.withOpacity(0.4),
+      blurRadius: 16,
+      spreadRadius: 0.2,
+      // offset: Offset(0, 8)),
+      ]),
+  );
+}
+
+
+Widget usageChart(
+    String text, double amount, int type, BuildContext context, Color color) {
+  final _media = MediaQuery.of(context).size;
+  return Container(
+      margin: EdgeInsets.only(top: 15, right: 15),
+      //padding: EdgeInsets.all(15),
+      height: screenAwareSize(300, context),
+      width: _media.width - 50 ,
+      decoration: BoxDecoration(
+          color: color,
+          borderRadius: BorderRadius.circular(15),
+          boxShadow: [
+      BoxShadow(
+      color: color.withOpacity(0.4),
+      blurRadius: 16,
+      spreadRadius: 0.2,
+      // offset: Offset(0, 8)),
+      ]),
+  );
+}
+
+Widget usageAmount(
+    String text, double amount, int type, BuildContext context, Color color) {
+  final _media = MediaQuery.of(context).size;
+  return Container(
+      margin: EdgeInsets.only(top: 15, right: 15),
+      //padding: EdgeInsets.all(15),
+      height: screenAwareSize(140, context),
+      width: _media.width / 2 - 30 ,
+      decoration: BoxDecoration(
+          color: color,
+          borderRadius: BorderRadius.circular(15),
+          boxShadow: [
+      BoxShadow(
+      color: color.withOpacity(0.4),
+      blurRadius: 16,
+      spreadRadius: 0.2,
+      // offset: Offset(0, 8)),
+      ]),
   );
 }
 
