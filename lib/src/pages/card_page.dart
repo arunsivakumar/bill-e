@@ -195,7 +195,7 @@ Widget userCard(
               color: color.withOpacity(0.4),
               blurRadius: 16,
               spreadRadius: 0.2,
-             // offset: Offset(0, 8)),
+              offset: Offset(0, 8)),
         ]),
   );
 }
@@ -216,7 +216,7 @@ Widget cardDetails(
       color: color.withOpacity(0.4),
       blurRadius: 16,
       spreadRadius: 0.2,
-      // offset: Offset(0, 8)),
+       offset: Offset(0, 8)),
       ]),
   );
 }
@@ -238,7 +238,7 @@ Widget usageChart(
       color: color.withOpacity(0.4),
       blurRadius: 16,
       spreadRadius: 0.2,
-      // offset: Offset(0, 8)),
+       offset: Offset(0, 8)),
       ]),
   );
 }
@@ -259,7 +259,7 @@ Widget usageAmount(
       color: color.withOpacity(0.4),
       blurRadius: 16,
       spreadRadius: 0.2,
-      // offset: Offset(0, 8)),
+       offset: Offset(0, 8)),
       ]),
   );
 }
