@@ -12,16 +12,16 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 1;
   static const TextStyle optionStyle =
   TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
     Text(
-      'Index 0: Home',
+      'Index 0: Business',
       style: optionStyle,
     ),
     Text(
-      'Index 1: Business',
+      'Index 1: Home',
       style: optionStyle,
     ),
     Text(
@@ -47,7 +47,7 @@ class _HomePageState extends State<HomePage> {
                 return Center(
                   child: Column(
                     children: <Widget>[
-                      Text(snapshot.data.first.billerIcon), //displays the billerName
+                      Text(snapshot.data.first.billerName), //displays the billerName
                       SizedBox(
                         height: 10.0,
                       ),
@@ -65,20 +65,20 @@ class _HomePageState extends State<HomePage> {
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
+            icon: Icon(Icons.history),
+            title: Text(''),
+          ),
+          BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            title: Text('Home'),
+            title: Text(''),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.business),
-            title: Text('Business'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.school),
-            title: Text('School'),
+            icon: Icon(Icons.credit_card),
+            title: Text(''),
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[800],
+        selectedItemColor: Colors.purpleAccent[800],
         onTap: _onItemTapped,
       ),
     );

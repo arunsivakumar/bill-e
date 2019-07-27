@@ -7,7 +7,9 @@ class App extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        fontFamily: "Varela",
+        primarySwatch: Colors.grey,
+        brightness: Brightness.dark,
+        accentColor: Colors.purpleAccent
       ),
       home: HomePage(),
     );
