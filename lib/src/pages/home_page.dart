@@ -179,19 +179,21 @@ Widget homepageWidget(BuildContext context) {
       ),
       swipeableCard(
         context,
-        "Earned",
-        200,
+        "assets/icons/netflix.png",
+        "Netflix",
+        12.99,
         1,
         Colors.grey.shade100,
-        Color(0xFF716cff),
+        Color(0xFFd81f26),
       ),
       swipeableCard(
         context,
-        "Spent",
-        3210,
+        "assets/icons/spotify.png",
+        "Spotify",
+        9.99,
         -1,
         Colors.grey.shade100,
-        Color(0xFFff596b),
+        Color(0xFF9e9e9e),
       ),
     ],
   );
@@ -240,7 +242,7 @@ Widget colorCard(
   );
 }
 
-Widget swipeableCard(BuildContext context, String name, double amount, int type,
+Widget swipeableCard(BuildContext context, String iconAsset, String name, double amount, int type,
     Color fillColor, Color bgColor) {
   return Slidable(
     actionPane: SlidableDrawerActionPane(),
@@ -250,15 +252,11 @@ Widget swipeableCard(BuildContext context, String name, double amount, int type,
         top: 15,
         right: 20,
       ),
-      color: Colors.red,
+      color: bgColor,
       child: ListTile(
-        leading: CircleAvatar(
-          backgroundColor: Colors.indigoAccent,
-          child: Text('AA'),
-          foregroundColor: Colors.white,
-        ),
-        title: Text('Tile BB'),
-        subtitle: Text('SlidableDrawerDelegate'),
+        leading: Image(image: AssetImage(iconAsset), width: 64, height: 64),
+        title: Text(name),
+        subtitle: Text(amount.toString()),
       ),
     ),
     secondaryActions: <Widget>[
