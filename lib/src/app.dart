@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:metsysoce/src/pages/onboarding.dart';
-import 'package:metsysoce/src/pages/card_page.dart';
-import 'package:metsysoce/src/pages/home_page.dart';
 
 
 import 'package:flutter/services.dart';
@@ -20,7 +18,7 @@ class App extends StatelessWidget {
         brightness: Brightness.dark,
         accentColor: Colors.cyanAccent
       ),
-      home: CardPage(),
+      home: OnboardingPage(),
     );
   }
 }

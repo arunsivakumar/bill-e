@@ -4,6 +4,9 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:metsysoce/src/utils/screen_size.dart';
+import 'package:metsysoce/src/data/data.dart';
+import 'package:metsysoce/src/widgets/banner_card.dart';
+import 'package:metsysoce/src/pages/card_page.dart';
 import 'package:http/http.dart' as http;
 
 class HomePage extends StatefulWidget {
@@ -24,11 +27,10 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final _media = MediaQuery.of(context).size;
     List<Widget> widgetOptions = <Widget>[
       homepageWidget(context),
       homepageWidget(context),
-      homepageWidget(context),
+      CardPage(),
     ];
     return Scaffold(
 //      body: Center(
@@ -80,6 +82,7 @@ class _HomePageState extends State<HomePage> {
 
 
 Widget homepageWidget(BuildContext context) {
+  final _media = MediaQuery.of(context).size;
   return ListView(
     physics: BouncingScrollPhysics(),
     padding: EdgeInsets.only(
@@ -100,6 +103,49 @@ Widget homepageWidget(BuildContext context) {
             ),
           ),
         ],
+      ),
+      SizedBox(
+        height: 25,
+      ),
+      Row(
+          children: <Widget>[
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Container(
+                margin: EdgeInsets.only(
+                  left: 20,
+                ),
+                height: _media.longestSide <= 775
+                    ? _media.height / 4
+                    : _media.height / 4.3,
+                width: _media.width,
+                child:
+                NotificationListener<OverscrollIndicatorNotification>(
+                  onNotification: (overscroll) {
+                    overscroll.disallowGlow();
+                  },
+                  child: ListView.builder(
+                    physics: BouncingScrollPhysics(),
+                    padding: EdgeInsets.only(bottom: 10),
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    itemCount: getBanners().length,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: EdgeInsets.only(right: 10),
+                        child: GestureDetector(
+                          onTap: () => "",
+                          child: BannerCard(
+                            bannerModel: getBanners()[index],
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ),
+            ),
+          ]
       ),
       SizedBox(
         height: 25,

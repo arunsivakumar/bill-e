@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:metsysoce/src/utils/screen_size.dart';
 import 'package:http/http.dart' as http;
 
@@ -122,25 +121,6 @@ class _CardPageState extends State<CardPage> {
 
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.history),
-            title: Text(''),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            title: Text(''),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.credit_card),
-            title: Text(''),
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.cyan,
-        onTap: _onItemTapped,
-      ),
     );
   }
 }
@@ -150,7 +130,7 @@ Widget cardImage(){
     body: Container(
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage("assets/bill-e.ong"),
+          image: AssetImage("assets/bill-e.png"),
           fit: BoxFit.cover,
         ),
       ),
