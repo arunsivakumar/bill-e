@@ -21,17 +21,16 @@ class _OnboardingPageState extends State<OnboardingPage> {
     Image bille = Image(image: billeAsset, width: 64, height: 64);
     List<Image> images = [
       netflix,
-      spotify,
-      bille,
       circleslife,
+      bille,
     ];
     List<String> titles = [
-      "Subscriptions", "Bills", "BILL-E", "BILL-E card"];
+      "Subscriptions", "Bills", "BILL-E"];
     List<String> descriptions = [
       "Manage your Netflix, Spotify (and whatever else, really) subscription and payments in one place.",
       "Keep an eye on all your bills and pay for them through BILL-E.",
       "Finally, an all-in-one app to manage your bills, subscriptions and payments.",
-      "Get all your bill and subscription payments onto the BILL-E card. So much simpler."];
+    ];
     return SpotlightCarousel(
       images: images,
       titles: titles,
