@@ -51,6 +51,7 @@ flutter:
     - assets/icons/netflix.png
     - assets/icons/spotify.png
     - assets/icons/bille.png
+    - assets/spending.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

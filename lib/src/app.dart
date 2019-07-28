@@ -20,7 +20,7 @@ class App extends StatelessWidget {
         brightness: Brightness.dark,
         accentColor: Colors.cyanAccent
       ),
-      home: HomePage(),
+      home: CardPage(),
     );
   }
 }
