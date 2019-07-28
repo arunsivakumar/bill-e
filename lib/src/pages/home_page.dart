@@ -118,7 +118,7 @@ Widget homepageWidget(BuildContext context) {
                 height: _media.longestSide <= 775
                     ? _media.height / 4
                     : _media.height / 4.3,
-                width: _media.width,
+                width: _media.width - 40,
                 child:
                 NotificationListener<OverscrollIndicatorNotification>(
                   onNotification: (overscroll) {
@@ -151,7 +151,7 @@ Widget homepageWidget(BuildContext context) {
         height: 25,
       ),
       Text(
-        "Due soon",
+        "Overdue payments",
         style: TextStyle(
           fontSize: 20,
           fontWeight: FontWeight.bold,
@@ -161,15 +161,15 @@ Widget homepageWidget(BuildContext context) {
       ),
       Row(
         children: <Widget>[
-          colorCard("Cash", 35.170, 1, context, Color(0xFF1b5bff)),
-          colorCard("Credit Debt", 4320, -1, context, Color(0xFFff3f5e)),
+          colorCard("assets/icons/netflix.png", "2 DAYS", 14.99, 1, context, Color(0xFF626f78)),
+          colorCard("assets/sp_icon.png", "4 DAYS", 48.99, 1, context, Color(0xFF626f78)),
         ],
       ),
       SizedBox(
         height: 30,
       ),
       Text(
-        "Recurring Bills",
+        "Bills",
         style: TextStyle(
           fontSize: 20,
           fontWeight: FontWeight.bold,
@@ -200,12 +200,13 @@ Widget homepageWidget(BuildContext context) {
 }
 
 Widget colorCard(
-    String text, double amount, int type, BuildContext context, Color color) {
+    String iconAsset, String text, double amount, int type,
+    BuildContext context, Color color) {
   final _media = MediaQuery.of(context).size;
   return Container(
     margin: EdgeInsets.only(top: 15, right: 15),
     padding: EdgeInsets.all(15),
-    height: screenAwareSize(90, context),
+    height: screenAwareSize(75, context),
     width: _media.width / 2 - 25,
     decoration: BoxDecoration(
         color: color,
@@ -219,24 +220,30 @@ Widget colorCard(
         ]),
     child: Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
-        Text(
-          text,
-          style: TextStyle(
-            fontSize: 18,
-            color: Colors.white,
-            fontWeight: FontWeight.w500,
-          ),
+        Image(
+            image: AssetImage(iconAsset), width: 48, height: 48
         ),
-        Text(
-          "${type > 0 ? "" : "-"} \$ ${amount.toString()}",
-          style: TextStyle(
-            fontSize: 22,
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
+        Row(crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Text(
+            text,
+            style: TextStyle(
+              fontSize: 18,
+              color: Colors.redAccent,
+              fontWeight: FontWeight.w500,
+            ),
           ),
-        )
+          Text(
+            "${type > 0 ? "" : "-"} \$ ${amount.toString()}",
+            style: TextStyle(
+              fontSize: 20,
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          )
+        ],)
       ],
     ),
   );
@@ -265,6 +272,7 @@ Widget swipeableCard(BuildContext context, String iconAsset, String name, double
         color: Colors.cyanAccent,
         icon: Icons.payment,
         onTap: () => "",
+        closeOnTap: true,
       ),
     ],
   );

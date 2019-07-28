@@ -51,7 +51,7 @@ class BannerCard extends StatelessWidget {
                       bannerModel.title3,
                       style: TextStyle(
                         fontSize: 18,
-                        color: Colors.grey.shade400,
+                        color: Colors.grey.shade200,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -59,21 +59,23 @@ class BannerCard extends StatelessWidget {
                       width: 10,
                     ),
                   ],
-                )
+                ),
               ],
             ),
           ),
-        Material(
-          elevation: 4,
-          child: Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage("assets/goat.jpg"),
-                fit: BoxFit.cover,
+          Positioned(
+            top: 15,
+            right: 15,
+            child: Container(
+              height: 160,
+              width: 160,
+              color: Colors.transparent,
+              padding: EdgeInsets.all(7),
+              child: Image(
+                  image: AssetImage(bannerModel.rankImage), width: 48, height: 48
               ),
             ),
           ),
-        ),
         ],
       ),
     );

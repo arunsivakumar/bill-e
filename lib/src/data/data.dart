@@ -7,13 +7,13 @@ List<BannerModel> getBanners() {
       "Rookie Bill-E",
       "3/10 bills paid",
       "Learn about Bill-E",
-      "image path"));
+      "assets/goat.png"));
   banners.add(BannerModel(
       "Pay 10 bills to be a",
       "Cadet Bill-E",
       "",
       "Learn about Bill-E",
-      "image path"));
+      "assets/goat2.png"));
 
   return banners;
 }
